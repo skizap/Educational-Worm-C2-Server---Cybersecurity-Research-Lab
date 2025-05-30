@@ -1,0 +1,27 @@
+# Educational Worm & C2 Server Dependencies
+# For cybersecurity research and education in controlled lab environments
+
+# Core networking and HTTP
+requests>=2.28.0
+urllib3>=1.26.0
+
+# SSH and secure connections
+paramiko>=2.11.0
+cryptography>=3.4.8
+
+# System monitoring and process management
+psutil>=5.9.0
+
+# Database for C2 operations
+# sqlite3 is included in Python standard library
+
+# Additional security and crypto
+pycryptodome>=3.15.0
+
+# Optional: For enhanced features
+# scapy>=2.4.5          # For advanced network operations
+# python-nmap>=0.7.1    # For network scanning
+# impacket>=0.10.0      # For SMB operations
+
+# Note: Some libraries may require additional system dependencies
+# Install with: pip install -r requirements.txt 
