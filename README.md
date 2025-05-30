@@ -1,267 +1,198 @@
-# Educational Worm & C2 Server - Cybersecurity Research Lab
+# Red Team Educational Tools
 
-**ETHICAL DISCLAIMER: This tool is for authorized testing only. Misuse is prohibited.**
+**ETHICAL DISCLAIMER: These tools are for authorized testing only. Misuse is prohibited.**
 
-This repository contains advanced educational tools for studying worm behavior and command & control (C2) operations in controlled cybersecurity lab environments.
+This repository contains advanced educational tools for cybersecurity research and penetration testing in controlled lab environments.
 
-## ⚠️ IMPORTANT WARNINGS
+## Tools Overview
 
-- **AUTHORIZED USE ONLY**: Only use in controlled lab environments with proper authorization
-- **EDUCATIONAL PURPOSE**: Designed for cybersecurity education and research
-- **ISOLATED ENVIRONMENT**: Must be used in air-gapped or isolated lab networks
-- **LEGAL COMPLIANCE**: Ensure compliance with all applicable laws and regulations
+### 1. Advanced Educational Worm (Python)
+- **File**: `worm_analysis_educational.py`
+- **Language**: Python 3.x
+- **Requirements**: See `requirements.txt`
+- **Features**: Advanced worm propagation techniques, C2 communication, data collection
 
-## 🎯 Educational Objectives
+### 2. RedV2 - Advanced Educational Worm (PowerShell Edition)
+- **File**: `RedV2_educational.ps1`
+- **Language**: PowerShell (Native Windows)
+- **Requirements**: Windows PowerShell (pre-installed on Windows)
+- **Features**: 
+  - Works out-of-the-box on Windows without additional dependencies
+  - Advanced network discovery and exploitation simulation
+  - Multiple persistence mechanisms
+  - Anti-analysis and evasion techniques
+  - Polymorphic payload generation
+  - Self-destruct capabilities with safety limits
 
-This lab demonstrates:
-- Advanced persistent threat (APT) techniques
-- Worm propagation mechanisms
-- Command & control infrastructure
-- Network security vulnerabilities
-- Incident response procedures
-- Digital forensics analysis
+### 3. C2 Server
+- **File**: `c2_server_educational.py`
+- **Language**: Python 3.x
+- **Purpose**: Command and control server for educational worms
 
-## 📁 Repository Contents
+## Quick Start
 
-```
-red/
-├── worm_analysis_educational.py    # Advanced educational worm (900+ lines)
-├── c2_server_educational.py        # C2 server with telnet interface
-├── run_lab.bat                     # Windows lab management script
-├── requirements.txt                # Python dependencies
-└── README.md                       # This documentation
-```
+### Running RedV2 (PowerShell Edition) - Recommended for Windows Labs
+```batch
+# Method 1: Using the launcher (recommended)
+run_RedV2.bat
 
-## 🔧 Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- Windows 10/11 (for full compatibility)
-- Isolated lab network environment
-- Administrative privileges (for some features)
-
-### Installation Steps
-
-1. **Clone or download this repository**
-   ```bash
-   git clone (https://github.com/skizap/Educational-Worm-C2-Server---Cybersecurity-Research-Lab.git)
-   cd red
-   ```
-
-2. **Install Python dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Verify lab environment**
-   - Ensure you're in an isolated network
-   - Confirm proper authorization
-   - Set up multiple VMs for testing (recommended)
-
-## 🚀 Quick Start Guide
-
-### Method 1: Using the Lab Management Script (Recommended)
-
-1. **Run the lab script**
-   ```cmd
-   run_lab.bat
-   ```
-
-2. **Follow the menu options:**
-   - Option 1: Start C2 Server
-   - Option 2: Run Worm (in separate terminal)
-   - Option 3: Connect via Telnet to control worms
-
-### Method 2: Manual Execution
-
-1. **Start the C2 Server**
-   ```bash
-   python c2_server_educational.py
-   ```
-   - Default HTTP port: 8080 (for worm communications)
-   - Default Telnet port: 9999 (for operator interface)
-   - Default credentials: admin/lab123
-
-2. **Run the Educational Worm** (in separate terminal)
-   ```bash
-   python worm_analysis_educational.py
-   ```
-
-3. **Connect to C2 via Telnet**
-   ```bash
-   telnet localhost 9999
-   ```
-
-## 🎮 C2 Server Commands
-
-Once connected to the telnet interface, use these commands:
-
-### Basic Commands
-- `help` - Show command help
-- `status` - Show C2 server status
-- `hosts` - List all infected hosts
-- `stats` - Show infection statistics
-- `logs` - View recent activity logs
-
-### Host Management
-- `host <worm_id>` - Show detailed host information
-- `cmd <worm_id> <command>` - Execute command on specific host
-- `broadcast <command>` - Send command to all active hosts
-
-### Control Commands
-- `kill <worm_id>` - Send self-destruct to specific host
-- `killall` - Send self-destruct to ALL hosts (requires confirmation)
-- `exit` - Disconnect from C2 server
-
-### Example Usage
-```
-C2> hosts                           # List infected machines
-C2> host abc123                     # Show details for worm ID abc123
-C2> cmd abc123 whoami               # Execute 'whoami' on specific host
-C2> broadcast systeminfo            # Get system info from all hosts
-C2> kill abc123                     # Self-destruct specific worm
+# Method 2: Direct PowerShell execution
+powershell.exe -ExecutionPolicy Bypass -File "RedV2_educational.ps1"
 ```
 
-## 🔬 Educational Features
+### Running Python Worm (Requires Python installation)
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-### Worm Capabilities
-- **Network Discovery**: ARP scanning, ping sweeps, NetBIOS enumeration
-- **Multi-Vector Propagation**: SMB, SSH, web vulnerabilities
-- **Polymorphic Payloads**: Dynamic code generation with encryption
-- **Persistence Mechanisms**: Registry, scheduled tasks, startup folders
-- **Anti-Analysis**: VM detection, debugger detection, sandbox evasion
-- **Data Collection**: System enumeration, credential harvesting simulation
-- **Self-Destruct**: 30-minute timer with comprehensive cleanup
+# Run the worm
+python worm_analysis_educational.py
 
-### C2 Server Features
-- **HTTP API**: RESTful interface for worm communications
-- **Telnet Interface**: Real-time command and control
-- **SQLite Database**: Persistent storage of infected hosts and commands
-- **Real-time Monitoring**: Live status updates and alerts
-- **Command Queuing**: Reliable command delivery to worms
-- **Data Exfiltration**: Secure collection of harvested data
+# Run C2 server (in separate terminal)
+python c2_server_educational.py
+```
 
-## 🛡️ Safety Features
+## Safety Features
 
-### Built-in Safeguards
-- **Lab Environment Detection**: Verifies controlled environment
-- **Time Limits**: Maximum 2-hour runtime with 30-minute self-destruct
-- **Propagation Limits**: Maximum 50 infection attempts
-- **Multiple Confirmations**: Required for destructive operations
-- **Comprehensive Logging**: Full audit trail of all activities
-- **Automatic Cleanup**: Removes persistence and traces on exit
+Both worms include comprehensive safety mechanisms:
 
-### Safety Confirmations Required
-1. Controlled lab environment confirmation
-2. Proper authorization verification
-3. Educational purpose acknowledgment
+- **Self-Destruct Timer**: Automatic cleanup after 30 minutes (configurable)
+- **Propagation Limits**: Maximum 50 infection attempts (configurable)
+- **Runtime Limits**: Maximum 2 hours execution time (configurable)
+- **Lab Environment Detection**: Enhanced safety in non-lab environments
+- **Multiple Confirmation Prompts**: Requires explicit user confirmation
+- **Automatic Cleanup**: Removes persistence mechanisms and traces
 
-## 📊 Monitoring & Analysis
+## Educational Features
 
-### Generated Files
-- `c2_server.log` - C2 server activity log
-- `advanced_worm.log` - Worm execution log
-- `c2_database.db` - SQLite database with host/command data
-- `collected_data_*.json` - Simulated data collection results
-- `exfil_*.json` - Data exfiltration files
+### Network Techniques
+- ARP table scanning
+- Ping sweep enumeration
+- Port scanning with service detection
+- NetBIOS enumeration
 
-### Analysis Capabilities
-- Real-time infection monitoring
-- Command execution tracking
-- Network propagation analysis
-- Persistence mechanism evaluation
-- Anti-analysis technique assessment
+### Exploitation Simulation
+- SMB vulnerability exploitation (EternalBlue-style)
+- SSH brute force attacks
+- WMI/PowerShell remoting exploitation
+- Web application vulnerability scanning
+- SQL injection detection
+- Remote code execution testing
 
-## 🔧 Customization
+### Persistence Mechanisms
+- Registry Run keys
+- Scheduled tasks
+- Startup folder placement
+- Service installation (Python version)
 
-### Worm Configuration
-Edit `worm_analysis_educational.py`:
-- Modify target ports in `self.target_ports`
-- Adjust propagation limits in `self.max_propagation`
-- Change self-destruct timer in `self.self_destruct_time`
-- Update C2 servers in `self.c2_servers`
+### Anti-Analysis Techniques
+- VM detection
+- Debugger detection
+- Sandbox evasion
+- Resource limitation detection
 
-### C2 Server Configuration
-Edit `c2_server_educational.py`:
-- Change default ports in `main()` function
-- Modify authentication in `authenticate()` method
-- Adjust host activity timeout in `is_host_active()`
+### Data Collection
+- System information gathering
+- Network configuration enumeration
+- Browser credential simulation
+- Interesting file discovery
 
-## 🚨 Troubleshooting
+## Configuration Options
+
+### RedV2 PowerShell Parameters
+```powershell
+# Custom configuration example
+.\RedV2_educational.ps1 -MaxRuntime 60 -SelfDestructTimer 15 -MaxPropagation 25
+```
+
+### Python Worm Configuration
+Edit the configuration variables in the script:
+- `max_runtime`: Maximum execution time
+- `self_destruct_time`: Self-destruct timer
+- `max_propagation`: Maximum propagation attempts
+
+## Lab Environment Setup
+
+### Recommended Lab Configuration
+1. **Isolated Network**: Use air-gapped or VLAN-isolated environment
+2. **Virtual Machines**: VMware, VirtualBox, or Hyper-V
+3. **Multiple OS**: Windows, Linux targets for comprehensive testing
+4. **Vulnerable Services**: Intentionally vulnerable applications
+5. **Monitoring**: Network and host-based monitoring tools
+
+### Lab Indicators
+The tools look for these lab environment indicators:
+- VM hypervisor detection
+- Lab environment marker files
+- Specific hostname patterns
+- Limited system resources
+
+## Legal and Ethical Considerations
+
+### ⚠️ IMPORTANT WARNINGS ⚠️
+
+1. **Authorization Required**: Only use in environments you own or have explicit written permission to test
+2. **Controlled Environment**: Use only in isolated lab environments
+3. **Educational Purpose**: Intended for cybersecurity education and research only
+4. **No Malicious Use**: Do not use for unauthorized access or malicious activities
+5. **Compliance**: Ensure compliance with local laws and regulations
+
+### Recommended Use Cases
+- Cybersecurity training and education
+- Red team exercises in controlled environments
+- Security research and development
+- Penetration testing methodology development
+- Academic research in cybersecurity
+
+## Technical Requirements
+
+### RedV2 (PowerShell Edition)
+- **OS**: Windows 7/8/10/11, Windows Server 2008+
+- **PowerShell**: Version 3.0+ (pre-installed on modern Windows)
+- **Privileges**: User-level (Administrator recommended for full features)
+- **Dependencies**: None (uses built-in Windows components)
+
+### Python Edition
+- **OS**: Windows, Linux, macOS
+- **Python**: 3.6+
+- **Dependencies**: See `requirements.txt`
+- **Privileges**: User-level (root/admin for some features)
+
+## Troubleshooting
 
 ### Common Issues
 
-1. **"Permission Denied" Errors**
-   - Run as Administrator
-   - Check Windows Defender exclusions
-   - Verify firewall settings
+1. **Execution Policy Errors (PowerShell)**
+   ```powershell
+   Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+   ```
 
-2. **Network Connection Issues**
-   - Ensure C2 server is running first
-   - Check port availability (8080, 9999)
+2. **Permission Denied**
+   - Run as Administrator (Windows)
+   - Use sudo for elevated privileges (Linux)
+
+3. **Network Discovery Issues**
+   - Check firewall settings
    - Verify network connectivity
+   - Ensure proper lab network configuration
 
-3. **Python Import Errors**
-   - Install missing dependencies: `pip install -r requirements.txt`
-   - Check Python version (3.8+ required)
+4. **C2 Communication Failures**
+   - Start C2 server before running worm
+   - Check port availability (8080, 9999)
+   - Verify firewall rules
 
-4. **Telnet Connection Failed**
-   - Enable Windows Telnet client: `dism /online /Enable-Feature /FeatureName:TelnetClient`
-   - Use alternative: `nc localhost 9999` or PuTTY
+## Contributing
 
-### Debug Mode
-Enable verbose logging by modifying the logging level:
-```python
-logging.basicConfig(level=logging.DEBUG)
-```
-
-## 📚 Educational Resources
-
-### Recommended Reading
-- "The Art of Memory Forensics" by Volatility Foundation
-- "Practical Malware Analysis" by Sikorski & Honig
-- "Advanced Penetration Testing" by Wil Allsopp
-
-### Related Topics
-- Network security fundamentals
-- Malware analysis techniques
-- Incident response procedures
-- Digital forensics methodology
-- Threat hunting strategies
-
-## ⚖️ Legal & Ethical Considerations
-
-### Authorized Use Only
-- Obtain explicit written permission before use
-- Use only in controlled, isolated environments
-- Comply with all applicable laws and regulations
-- Follow responsible disclosure practices
-
-### Educational Ethics
-- Use for learning and defensive purposes only
-- Do not modify for malicious purposes
-- Respect privacy and confidentiality
-- Report vulnerabilities responsibly
-
-## 🤝 Contributing
-
-This is an educational tool. Contributions should focus on:
-- Enhanced educational value
-- Improved safety mechanisms
+This is an educational project. Contributions should focus on:
+- Enhanced safety mechanisms
+- Additional educational features
 - Better documentation
-- Additional analysis capabilities
+- Bug fixes and improvements
 
-## 📞 Support
+## Disclaimer
 
-For educational use questions:
-- Review the documentation thoroughly
-- Check troubleshooting section
-- Ensure proper lab environment setup
+These tools are provided for educational and research purposes only. The authors are not responsible for any misuse or damage caused by these tools. Users are solely responsible for ensuring they have proper authorization and are complying with applicable laws and regulations.
 
-## 📄 License
+## License
 
-This educational tool is provided for authorized cybersecurity research and education only. Users are responsible for compliance with all applicable laws and regulations.
-
----
-
-**Remember: With great power comes great responsibility. Use these tools ethically and legally.** 
+This project is intended for educational use only. See the individual files for specific licensing terms. 
