@@ -44,7 +44,7 @@ red/
 
 1. **Clone or download this repository**
    ```bash
-   git clone <repository-url>
+   git clone (https://github.com/skizap/Educational-Worm-C2-Server---Cybersecurity-Research-Lab.git)
    cd red
    ```
 
